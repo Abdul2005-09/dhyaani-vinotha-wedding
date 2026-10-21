@@ -30,13 +30,13 @@ export function Countdown() {
         <div className="countdown-shape bg-gold-foil p-px opacity-80">
           <div className="countdown-shape bg-burgundy-panel relative px-[10%] py-3.5 sm:py-5">
             <div className="flex items-center justify-center gap-2.5">
-              <span className="h-px w-6 bg-gold/70 sm:w-10" />
+              <span className="hidden h-px w-10 bg-gold/70 sm:block" />
               <Diamond />
-              <p className="font-display text-[10px] tracking-[0.24em] text-gold sm:text-xs">
+              <p className="font-display text-[10px] tracking-[0.16em] whitespace-nowrap text-gold sm:text-xs sm:tracking-[0.24em]">
                 COUNTDOWN TO OUR MUHURTHAM
               </p>
               <Diamond />
-              <span className="h-px w-6 bg-gold/70 sm:w-10" />
+              <span className="hidden h-px w-10 bg-gold/70 sm:block" />
             </div>
             <div
               className="mt-3 grid grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] items-center gap-1 sm:gap-2"

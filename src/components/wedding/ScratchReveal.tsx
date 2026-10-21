@@ -56,28 +56,35 @@ function drawCoating(ctx: CanvasRenderingContext2D, w: number, h: number, dpr: n
   ctx.strokeStyle = "rgba(255,246,220,0.6)";
   ctx.strokeRect(9 * dpr, 9 * dpr, w - 18 * dpr, h - 18 * dpr);
 
-  // Label
+  // Label (shrinks to fit narrow panels)
   const cx = w / 2;
   const cy = h / 2;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  const size = Math.min(18 * dpr, w / 16);
   const c = ctx as CanvasRenderingContext2D & { letterSpacing?: string };
-  if ("letterSpacing" in c) c.letterSpacing = `${size * 0.22}px`;
+  const canSpace = "letterSpacing" in c;
+  const title = "SCRATCH TO REVEAL";
+  let size = Math.min(17 * dpr, h / 7);
+  let titleW = 0;
+  for (let i = 0; i < 12; i++) {
+    if (canSpace) c.letterSpacing = `${size * 0.2}px`;
+    ctx.font = `600 ${size}px Cinzel, Georgia, serif`;
+    titleW = ctx.measureText(title).width;
+    if (titleW + size * 4 <= w - 28 * dpr) break;
+    size *= 0.92;
+  }
   ctx.fillStyle = BURGUNDY;
-  ctx.font = `600 ${size}px Cinzel, Georgia, serif`;
-  ctx.fillText("SCRATCH TO REVEAL", cx, cy - size * 0.55);
-  if ("letterSpacing" in c) c.letterSpacing = "0px";
+  ctx.fillText(title, cx, cy - size * 0.6);
+  if (canSpace) c.letterSpacing = "0px";
   ctx.fillStyle = BURGUNDY_DEEP;
   ctx.font = `italic 500 ${size * 0.95}px "Cormorant Garamond", Georgia, serif`;
   ctx.fillText("gently scratch the gold to see our dates", cx, cy + size * 0.85);
 
   // Small diamonds either side of the title
-  const text = ctx.measureText("SCRATCH TO REVEAL").width;
   ctx.fillStyle = BURGUNDY;
   for (const sx of [-1, 1]) {
-    const dx = cx + sx * (Math.min(text, w * 0.6) / 2 + size * 1.6);
-    const dy = cy - size * 0.55;
+    const dx = cx + sx * (titleW / 2 + size * 1.1);
+    const dy = cy - size * 0.6;
     const r = size * 0.22;
     ctx.beginPath();
     ctx.moveTo(dx, dy - r);
