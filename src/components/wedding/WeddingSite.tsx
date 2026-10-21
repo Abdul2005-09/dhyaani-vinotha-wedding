@@ -7,7 +7,9 @@ import memory1 from "@/assets/memory-1.jpg";
 import memory2 from "@/assets/memory-2.jpg";
 import memory3 from "@/assets/memory-3.jpg";
 import { Countdown } from "./Countdown";
-import { Flourish, LinedWord } from "./Flourish";
+import { CornerOrnament, Flourish, LinedWord, OrnamentDivider } from "./Flourish";
+import { Reveal } from "./Reveal";
+import { ScratchReveal } from "./ScratchReveal";
 
 export const DIRECTIONS_URL =
   "https://www.google.com/maps/search/?api=1&query=The%20Royal%20Mahal%2C%20Vayalur%2C%20Trichy%2C%20Tamil%20Nadu%2C%20India";
@@ -44,11 +46,12 @@ function SideGarlands({ count }: { count: number }) {
 function EventCard({ title, lines }: { title: string; lines: string[] }) {
   return (
     <div className="flex flex-col items-center gap-1.5 text-center sm:flex-row sm:items-start sm:gap-3 sm:text-left">
-      <CalendarDays className="h-6 w-6 shrink-0 text-burgundy sm:mt-0.5" strokeWidth={1.5} />
+      <CalendarDays className="h-6 w-6 shrink-0 text-burgundy sm:mt-0.5" strokeWidth={1.25} />
       <div>
-        <h3 className="font-display text-sm font-semibold tracking-[0.12em] text-burgundy">
+        <h3 className="font-display text-[13px] font-semibold tracking-[0.16em] text-burgundy sm:text-sm">
           {title}
         </h3>
+        <span className="mx-auto mt-1 mb-1 block h-px w-8 bg-gold sm:mx-0" aria-hidden="true" />
         {lines.map((l) => (
           <p key={l} className="font-serif text-[15px] leading-snug text-burgundy-deep sm:text-base">
             {l}
@@ -61,17 +64,18 @@ function EventCard({ title, lines }: { title: string; lines: string[] }) {
 
 function Polaroid({ src, rotate, className }: { src: string; rotate: string; className?: string }) {
   return (
-    <figure
-      className={`bg-ivory p-1.5 pb-4 shadow-polaroid ring-1 ring-gold/40 ${rotate} ${className ?? ""}`}
-    >
-      <img
-        src={src}
-        alt="Illustrated memory of Dhyaani and Vinotha"
-        width={928}
-        height={1152}
-        loading="lazy"
-        className="aspect-[4/5] w-full object-cover"
-      />
+    <figure className={`memory-frame ${rotate} ${className ?? ""}`}>
+      <div className="relative">
+        <img
+          src={src}
+          alt="Illustrated memory of Dhyaani and Vinotha"
+          width={928}
+          height={1152}
+          loading="lazy"
+          className="aspect-[4/5] w-full object-cover"
+        />
+        <span className="pointer-events-none absolute inset-1 border border-gold/60" aria-hidden="true" />
+      </div>
     </figure>
   );
 }
@@ -79,12 +83,20 @@ function Polaroid({ src, rotate, className }: { src: string; rotate: string; cla
 export function WeddingSite() {
   return (
     <div className="min-h-screen bg-parchment">
-      <main className="relative mx-auto max-w-[640px] overflow-hidden bg-parchment-page shadow-card">
+      <main className="paper-grain relative mx-auto max-w-[640px] overflow-hidden bg-parchment-page shadow-card">
+        {/* Engraved page frame */}
+        <div className="engraved-frame pointer-events-none absolute inset-2 z-0 sm:inset-3" aria-hidden="true">
+          <CornerOrnament className="absolute -left-px -top-px h-8 w-8 text-gold" />
+          <CornerOrnament className="absolute -right-px -top-px h-8 w-8 rotate-90 text-gold" />
+          <CornerOrnament className="absolute -bottom-px -right-px h-8 w-8 rotate-180 text-gold" />
+          <CornerOrnament className="absolute -bottom-px -left-px h-8 w-8 -rotate-90 text-gold" />
+        </div>
+
         {/* ---------- Header: couple + names ---------- */}
         <div className="relative">
           <SideGarlands count={4} />
 
-          <header className="relative z-10 pt-5">
+          <header className="relative z-10 pt-6">
             <div className="flex flex-col items-center text-gold">
               <span className="font-script text-4xl leading-none text-burgundy">
                 D<span className="mx-0.5 text-2xl text-gold">&</span>V
@@ -124,92 +136,105 @@ export function WeddingSite() {
             </div>
           </header>
 
-          {/* ---------- Our Special Dates ---------- */}
+          {/* ---------- Our Special Dates (scratch to reveal) ---------- */}
           <section className="relative z-30 mx-auto mt-2 w-[calc(100%-64px)] sm:w-[calc(100%-120px)]">
-            <div className="rounded-sm border border-gold bg-ivory/85 p-1 shadow-card">
-              <div className="rounded-sm border border-gold/60 px-3 py-4 sm:px-6 sm:py-5">
-                <h2 className="text-center font-script text-[34px] leading-none text-burgundy sm:text-4xl">
-                  Our Special Dates
-                </h2>
-                <div className="gold-rule mx-auto mt-2 w-3/4" />
-                <div className="mt-4 grid grid-cols-[1fr_auto_1fr] items-start gap-3 sm:gap-5">
-                  <EventCard
-                    title="RECEPTION"
-                    lines={["Saturday,", "21 November 2026", "6:00 PM onwards"]}
-                  />
-                  <div className="flex h-full flex-col items-center" aria-hidden="true">
-                    <span className="w-px flex-1 bg-gold" />
-                    <span className="my-1 h-2 w-2 rotate-45 bg-gold" />
-                    <span className="w-px flex-1 bg-gold" />
+            <Reveal>
+              <div className="bg-gold-foil gold-shimmer rounded-sm p-px shadow-card">
+                <div className="rounded-sm bg-ivory p-1">
+                  <div className="rounded-sm border border-gold/60 px-3 pt-4 pb-3 sm:px-6 sm:pt-5">
+                    <h2 className="text-center font-script text-[34px] leading-none text-burgundy sm:text-4xl">
+                      Our Special Dates
+                    </h2>
+                    <OrnamentDivider className="mx-auto mt-2 w-4/5" />
+                    <div className="mt-3">
+                      <ScratchReveal>
+                        <div className="grid grid-cols-[1fr_auto_1fr] items-start gap-3 py-2 sm:gap-5">
+                          <EventCard
+                            title="RECEPTION"
+                            lines={["Saturday,", "21 November 2026", "6:00 PM onwards"]}
+                          />
+                          <div className="flex h-full flex-col items-center" aria-hidden="true">
+                            <span className="w-px flex-1 bg-gold" />
+                            <span className="my-1 h-2 w-2 rotate-45 bg-gold" />
+                            <span className="w-px flex-1 bg-gold" />
+                          </div>
+                          <EventCard
+                            title="MUHURTHAM"
+                            lines={["Sunday,", "22 November 2026", "10:00 AM to 11:50\u00A0AM"]}
+                          />
+                        </div>
+                      </ScratchReveal>
+                    </div>
                   </div>
-                  <EventCard
-                    title="MUHURTHAM"
-                    lines={["Sunday,", "22 November 2026", "10:00 AM to 11:50\u00A0AM"]}
-                  />
                 </div>
               </div>
-            </div>
+            </Reveal>
           </section>
         </div>
 
+        <OrnamentDivider className="relative z-10 mx-auto mt-6 w-[60%]" />
+
         {/* ---------- Venue ---------- */}
-        <section className="relative z-10 mt-7 text-center">
-          <div className="flex items-center justify-center gap-1.5 text-burgundy">
-            <MapPin className="h-5 w-5 fill-burgundy text-burgundy" strokeWidth={1.5} />
-            <span className="font-script text-3xl leading-none">Venue</span>
-          </div>
-          <h2 className="mt-1 font-serif text-2xl font-semibold text-burgundy-deep sm:text-3xl">
-            The Royal Mahal
-          </h2>
-          <p className="font-serif text-[15px] text-burgundy-deep sm:text-base">
-            Vayalur, Trichy, Tamil Nadu, India
-          </p>
-          <img
-            src={mahalArt}
-            alt="Hand-drawn illustration of The Royal Mahal, Vayalur, Trichy"
-            width={1584}
-            height={672}
-            loading="lazy"
-            className="mask-fade-x -mt-6 w-full mix-blend-multiply"
-          />
+        <section className="relative z-10 mt-4 text-center">
+          <Reveal>
+            <div className="flex items-center justify-center gap-1.5 text-burgundy">
+              <MapPin className="h-5 w-5 fill-burgundy text-burgundy" strokeWidth={1.5} />
+              <span className="font-script text-3xl leading-none">Venue</span>
+            </div>
+            <h2 className="mt-1 font-display text-xl font-semibold tracking-[0.08em] text-burgundy-deep sm:text-2xl">
+              The Royal Mahal
+            </h2>
+            <p className="font-serif text-[15px] text-burgundy-deep sm:text-base">
+              Vayalur, Trichy, Tamil Nadu, India
+            </p>
+          </Reveal>
+          <Reveal className="sketch-wrap">
+            <img
+              src={mahalArt}
+              alt="Hand-drawn illustration of The Royal Mahal, Vayalur, Trichy"
+              width={1584}
+              height={672}
+              loading="lazy"
+              className="sketch-art mask-fade-x -mt-6 w-full mix-blend-multiply"
+            />
+          </Reveal>
         </section>
 
         {/* ---------- Countdown ---------- */}
         <section className="relative z-10 mx-auto -mt-6 w-[calc(100%-24px)] sm:w-[calc(100%-80px)]">
-          <Countdown />
+          <Reveal>
+            <Countdown />
+          </Reveal>
         </section>
 
         {/* ---------- Memories + Directions ---------- */}
-        <section className="relative z-10 mt-5 grid grid-cols-[1fr_auto_1fr] items-center gap-2 px-3 sm:px-8">
-          <Polaroid src={memory1} rotate="-rotate-6" />
+        <section className="relative z-10 mt-6 grid grid-cols-[1fr_auto_1fr] items-center gap-2 px-4 sm:px-9">
+          <Reveal delay={0}>
+            <Polaroid src={memory1} rotate="-rotate-6" />
+          </Reveal>
           <div className="flex justify-center">
-            <a
-              href={DIRECTIONS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-gold bg-burgundy-panel px-3.5 py-2.5 font-serif text-[15px] font-semibold text-ivory shadow-card transition-transform hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:px-6 sm:text-lg"
-            >
+            <a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="btn-burgundy">
               <MapPin className="h-4 w-4 text-gold" />
               Get Directions
               <ChevronRight className="h-4 w-4 text-gold" />
             </a>
           </div>
-          <div className="relative aspect-[1/2]">
+          <Reveal delay={150} className="relative aspect-[1/2]">
             <Polaroid src={memory2} rotate="rotate-6" className="absolute right-0 top-0 w-[80%]" />
-            <Polaroid
-              src={memory3}
-              rotate="-rotate-3"
-              className="absolute bottom-0 left-0 w-[76%]"
-            />
-          </div>
+            <Polaroid src={memory3} rotate="-rotate-3" className="absolute bottom-0 left-0 w-[76%]" />
+          </Reveal>
         </section>
 
+        <OrnamentDivider className="relative z-10 mx-auto mt-6 w-[60%]" />
+
         {/* ---------- Closing ---------- */}
-        <footer className="relative z-10 mt-6 text-center">
-          <p className="px-6 font-serif text-xl italic text-burgundy-deep sm:text-2xl">
-            Your Presence, Our Greatest Blessing
-          </p>
-          <Flourish className="mx-auto mt-1 w-32 text-gold" />
+        <footer className="relative z-10 mt-3 text-center">
+          <Reveal>
+            <p className="px-6 font-serif text-xl italic text-burgundy-deep sm:text-2xl">
+              Your Presence, Our Greatest Blessing
+            </p>
+            <Flourish className="mx-auto mt-1 w-32 text-gold" />
+          </Reveal>
           <img
             src={floralCluster}
             alt=""
