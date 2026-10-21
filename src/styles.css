@@ -258,20 +258,30 @@
 }
 
 /* ---------- Countdown panel ---------- */
-.countdown-panel {
-  background: var(--gradient-burgundy);
-  clip-path: polygon(6% 0, 94% 0, 100% 50%, 94% 100%, 6% 100%, 0 50%);
-  position: relative;
+.countdown-shape {
+  clip-path: polygon(5% 0, 95% 0, 100% 50%, 95% 100%, 5% 100%, 0 50%);
 }
-.countdown-panel::before {
-  content: "";
-  position: absolute;
-  inset: 4px;
-  clip-path: polygon(6% 0, 94% 0, 100% 50%, 94% 100%, 6% 100%, 0 50%);
-  border: 1px solid var(--gold);
-  background: transparent;
-  pointer-events: none;
-  box-shadow: inset 0 0 0 1px var(--gold);
+@utility bg-burgundy-panel {
+  background-image: var(--gradient-burgundy);
+}
+@utility bg-gold-foil {
+  background-image: var(--gradient-gold);
+}
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
+@utility shadow-polaroid {
+  box-shadow: var(--shadow-polaroid);
+}
+@utility mask-soft {
+  -webkit-mask-image: radial-gradient(ellipse 72% 72% at 50% 46%, black 58%, transparent 100%);
+  mask-image: radial-gradient(ellipse 72% 72% at 50% 46%, black 58%, transparent 100%);
+}
+@utility mask-fade-x {
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent), linear-gradient(180deg, transparent, black 15%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent), linear-gradient(180deg, transparent, black 15%);
+  mask-composite: intersect;
 }
 
 @media (prefers-reduced-motion: reduce) {
