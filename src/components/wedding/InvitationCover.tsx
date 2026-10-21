@@ -1,5 +1,38 @@
+import { useEffect, useRef, useState } from "react";
 import coverArt from "@/assets/cover.jpg";
+import openingVideo from "@/assets/opening-video.mp4.asset.json";
 import { Flourish } from "./Flourish";
+
+/** Full-screen, muted, looping background video; hides itself if it fails to load. */
+function CoverVideo() {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    v.muted = true; // the separate song is the only sound source
+    v.play().catch(() => {
+      /* autoplay refused: first frame stays as a still */
+    });
+  }, []);
+
+  if (failed) return null;
+  return (
+    <video
+      ref={ref}
+      className="cover-video"
+      src={openingVideo.url}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+      disablePictureInPicture
+      onError={() => setFailed(true)}
+    />
+  );
+}
 
 type InvitationCoverProps = {
   opening: boolean;
@@ -57,7 +90,7 @@ export function InvitationCover({ opening, onOpen }: InvitationCoverProps) {
       }}
     >
       <div className="cover-backdrop" aria-hidden="true">
-        <img src={coverArt} alt="" />
+        <CoverVideo />
       </div>
       <div className="cover-stage">
         <div className="cover-door cover-door--left">
