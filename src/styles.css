@@ -480,6 +480,7 @@
   .cover-door { transition-duration: 600ms; }
   .site-reveal { animation: none; }
   .cover-tap { animation: none; }
+  .music-toggle.is-playing { animation: none; }
   .gold-shimmer { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .sketch-wrap .sketch-art { clip-path: none; filter: sepia(0.28); transition: none; }
