@@ -241,6 +241,7 @@
   font-size: 3.4cqw;
   letter-spacing: 0.35em;
   color: var(--burgundy-deep);
+  text-shadow: 0 0 6px var(--ivory), 0 0 14px var(--ivory);
   animation: tap-pulse 2.2s ease-in-out infinite;
 }
 @keyframes tap-pulse {
@@ -274,13 +275,13 @@
   box-shadow: var(--shadow-polaroid);
 }
 @utility mask-soft {
-  -webkit-mask-image: radial-gradient(ellipse 72% 72% at 50% 46%, black 58%, transparent 100%);
-  mask-image: radial-gradient(ellipse 72% 72% at 50% 46%, black 58%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 68% 70% at 50% 48%, black 48%, transparent 98%);
+  mask-image: radial-gradient(ellipse 68% 70% at 50% 48%, black 48%, transparent 98%);
 }
 @utility mask-fade-x {
-  -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent), linear-gradient(180deg, transparent, black 15%);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent), linear-gradient(180deg, transparent, black 35%);
   -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent), linear-gradient(180deg, transparent, black 15%);
+  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent), linear-gradient(180deg, transparent, black 35%);
   mask-composite: intersect;
 }
 

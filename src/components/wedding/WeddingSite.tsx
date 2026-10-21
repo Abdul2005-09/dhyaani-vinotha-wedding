@@ -79,7 +79,7 @@ function Polaroid({ src, rotate, className }: { src: string; rotate: string; cla
 export function WeddingSite() {
   return (
     <div className="min-h-screen bg-parchment">
-      <main className="relative mx-auto max-w-[600px] overflow-hidden bg-parchment-page shadow-card">
+      <main className="relative mx-auto max-w-[640px] overflow-hidden bg-parchment-page shadow-card">
         {/* ---------- Header: couple + names ---------- */}
         <div className="relative">
           <SideGarlands count={4} />
@@ -144,7 +144,7 @@ export function WeddingSite() {
                   </div>
                   <EventCard
                     title="MUHURTHAM"
-                    lines={["Sunday,", "22 November 2026", "10:00 AM to 11:50 AM"]}
+                    lines={["Sunday,", "22 November 2026", "10:00 AM to 11:50\u00A0AM"]}
                   />
                 </div>
               </div>
@@ -170,7 +170,7 @@ export function WeddingSite() {
             width={1584}
             height={672}
             loading="lazy"
-            className="mask-fade-x -mt-4 w-full"
+            className="mask-fade-x -mt-6 w-full mix-blend-multiply"
           />
         </section>
 
@@ -180,26 +180,26 @@ export function WeddingSite() {
         </section>
 
         {/* ---------- Memories + Directions ---------- */}
-        <section className="relative z-10 mt-5 grid grid-cols-[1fr_minmax(160px,1.3fr)_1fr] items-center gap-2 px-3 sm:px-8">
+        <section className="relative z-10 mt-5 grid grid-cols-[1fr_auto_1fr] items-center gap-2 px-3 sm:px-8">
           <Polaroid src={memory1} rotate="-rotate-6" />
           <div className="flex justify-center">
             <a
               href={DIRECTIONS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-gold bg-burgundy-panel px-4 py-2.5 font-serif text-base font-semibold text-ivory shadow-card transition-transform hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:px-6 sm:text-lg"
+              className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-gold bg-burgundy-panel px-3.5 py-2.5 font-serif text-[15px] font-semibold text-ivory shadow-card transition-transform hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:px-6 sm:text-lg"
             >
               <MapPin className="h-4 w-4 text-gold" />
               Get Directions
               <ChevronRight className="h-4 w-4 text-gold" />
             </a>
           </div>
-          <div className="relative h-full min-h-[180px] sm:min-h-[230px]">
-            <Polaroid src={memory2} rotate="rotate-6" className="absolute right-0 top-0 w-[88%]" />
+          <div className="relative aspect-[1/2]">
+            <Polaroid src={memory2} rotate="rotate-6" className="absolute right-0 top-0 w-[80%]" />
             <Polaroid
               src={memory3}
               rotate="-rotate-3"
-              className="absolute bottom-0 left-0 w-[78%]"
+              className="absolute bottom-0 left-0 w-[76%]"
             />
           </div>
         </section>
