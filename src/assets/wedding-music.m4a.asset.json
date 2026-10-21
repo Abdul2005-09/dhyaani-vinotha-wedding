@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "asset_id": "cb09c53a-0159-4e1b-b9c6-826941567329",
+  "asset_id": "5a523927-e07b-4529-a9ae-bbb237ab8841",
   "project_id": "bbd8b9c1-d8f2-4ebe-ad74-99a0b72bc2a1",
-  "url": "/__l5e/assets-v1/cb09c53a-0159-4e1b-b9c6-826941567329/wedding-music.m4a",
-  "r2_key": "a/v1/bbd8b9c1-d8f2-4ebe-ad74-99a0b72bc2a1/cb09c53a-0159-4e1b-b9c6-826941567329/wedding-music.m4a",
+  "url": "/__l5e/assets-v1/5a523927-e07b-4529-a9ae-bbb237ab8841/wedding-music.m4a",
+  "r2_key": "a/v1/bbd8b9c1-d8f2-4ebe-ad74-99a0b72bc2a1/5a523927-e07b-4529-a9ae-bbb237ab8841/wedding-music.m4a",
   "original_filename": "wedding-music.m4a",
   "size": 340338,
-  "content_type": "application/octet-stream",
-  "created_at": "2026-10-21T11:56:58Z"
+  "content_type": "audio/mp4",
+  "created_at": "2026-10-21T11:57:12Z"
 }
