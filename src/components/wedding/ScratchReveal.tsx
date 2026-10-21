@@ -230,7 +230,9 @@ export function ScratchReveal({ children }: { children: ReactNode }) {
   return (
     <div>
       <div ref={wrapRef} className="relative">
-        <div aria-hidden={covered ? true : undefined}>{children}</div>
+        <div aria-hidden={covered ? true : undefined} className={phase === "revealed" ? undefined : "select-none"}>
+          {children}
+        </div>
         {phase !== "revealed" && (
           <canvas
             ref={canvasRef}

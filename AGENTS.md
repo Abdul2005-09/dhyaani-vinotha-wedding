@@ -13,3 +13,5 @@
 - Single-page invitation: `src/routes/index.tsx` renders the wedding site underneath and the cover on top; the cover only unmounts after its opening animation, so never navigate between them.
 - The cover artwork is text-free; all names, dates and buttons are real HTML layered on top (cover text sized in `cqw` so it scales with the artwork).
 - Countdown math lives in `src/lib/countdown.ts` (clamped at zero) and is covered by `src/test/countdown.test.ts`.
+- Scratch-to-reveal rules (threshold, tap slop, cleared-fraction math) live in `src/lib/scratch.ts`, tested in `src/test/scratch.test.ts`; `ScratchReveal` only handles canvas drawing and pointer input.
+- Scroll entrance animations use the shared `Reveal` wrapper + `.reveal` CSS so reduced-motion is handled in one place.
