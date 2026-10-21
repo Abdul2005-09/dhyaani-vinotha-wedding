@@ -19,7 +19,7 @@ export function clearedFraction(rgba: ArrayLike<number>, step = 1): number {
   let cleared = 0;
   for (let i = 3; i < rgba.length; i += stride) {
     total++;
-    if (rgba[i] < 128) cleared++;
+    if ((rgba[i] ?? 255) < 128) cleared++;
   }
   return total === 0 ? 0 : cleared / total;
 }
