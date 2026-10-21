@@ -143,12 +143,49 @@
   background-color: var(--cherry);
   transition: opacity 900ms ease 400ms;
 }
-.cover-backdrop img {
+.cover-video {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  filter: blur(28px) brightness(0.55);
-  transform: scale(1.15);
+  object-fit: contain; /* whole frame visible; cherry backdrop fills letterbox */
+  object-position: center;
+  pointer-events: none;
+}
+
+/* ---------- Music toggle ---------- */
+.music-toggle {
+  position: fixed;
+  left: calc(14px + env(safe-area-inset-left));
+  bottom: calc(14px + env(safe-area-inset-bottom));
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 9999px;
+  border: 1px solid var(--gold);
+  background-image: var(--gradient-burgundy);
+  color: var(--gold);
+  opacity: 0.75;
+  box-shadow: var(--shadow-card), inset 0 0 0 2px color-mix(in oklab, var(--burgundy-deep) 80%, transparent);
+  transition: opacity 300ms ease, transform 300ms ease;
+  cursor: pointer;
+}
+.music-toggle.is-playing {
+  opacity: 1;
+  animation: music-glow 2.4s ease-in-out infinite;
+}
+.music-toggle:hover {
+  transform: scale(1.05);
+}
+.music-toggle:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+@keyframes music-glow {
+  0%, 100% { box-shadow: var(--shadow-card), 0 0 0 0 color-mix(in oklab, var(--gold) 45%, transparent); }
+  50% { box-shadow: var(--shadow-card), 0 0 0 6px color-mix(in oklab, var(--gold) 0%, transparent); }
 }
 .cover-stage {
   position: absolute;
@@ -443,6 +480,7 @@
   .cover-door { transition-duration: 600ms; }
   .site-reveal { animation: none; }
   .cover-tap { animation: none; }
+  .music-toggle.is-playing { animation: none; }
   .gold-shimmer { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .sketch-wrap .sketch-art { clip-path: none; filter: sepia(0.28); transition: none; }
